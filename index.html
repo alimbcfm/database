@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة بيانات إلى جدول</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: black solid 3px;
+            background-color: aqua;
+        }
+        th, td {
+            border: 2px solid #c60c0c;
+            padding: 8px;
+            text-align: center;
+
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #c60c0c;
+
+        }
+        input{
+            border: blue 3px solid;
+            font-size: larger;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+
+<h2>جدول البيانات</h2>
+<table id="dt">
+<input type="text" id="city" placeholder="المدينة">
+<input type="number" id="age" placeholder="العمر">
+<input type="text" id="name" placeholder="الاسم">
+
+<button id="add">إضافة بيانات</button>
+<br>
+    <thead>
+        <tr>
+            <th>المدينة</th>
+            <th>العمر</th>
+            <th>الاسم</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- الصفوف ستضاف هنا -->
+    </tbody>
+</table>
+
+<br>
+
+
+<script>
+    // وظيفة لإضافة صف جديد إلى الجدول
+    document.getElementById('add').addEventListener('click', function() {
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        const city = document.getElementById('city').value;
+
+        // التأكد من عدم وجود حقول فارغة
+        if (name === '' || age === '' || city === '') {
+            alert('يرجى ملء جميع الحقول!');
+            return;
+        }
+
+        // الحصول على جسم الجدول
+        const tableBody = document.getElementById('dt').getElementsByTagName('tbody')[0];
+
+        // إنشاء صف جديد
+        const newRow = tableBody.insertRow();
+
+        // إضافة خلايا إلى الصف الجديد
+        const nameCell = newRow.insertCell(0);
+        const ageCell = newRow.insertCell(1);
+        const cityCell = newRow.insertCell(2);
+
+        // ملء الخلايا بالبيانات المدخلة
+        nameCell.textContent = name;
+        ageCell.textContent = age;
+        cityCell.textContent = city;
+
+        // مسح الحقول بعد الإضافة
+        document.getElementById('name').value = '';
+        document.getElementById('age').value = '';
+        document.getElementById('city').value = '';
+    });
+</script>
+
+</body>
+</html>
